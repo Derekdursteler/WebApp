@@ -8,6 +8,17 @@ addTodo.onclick = function () {
     todoList.appendChild(newListItem);
 };
 
+function handleKey(e) {
+    e.preventDefault();
+    if (e.keyCode === 13 ) {
+        var todoList = document.querySelector("#todo-list");
+        var todoName = document.querySelector("#todo-name");
+        var newListItem = document.createElement("li");
+        newListItem.innerHTML = todoName.value;
+        todoList.appendChild(newListItem);
+    }
+}
+
 fetch("https://api.myjson.com/bins/1gbmos").then(function (response) {
     response.json().then(function (data) {
         console.log("data loaded from server", data);
