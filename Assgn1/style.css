@@ -3,9 +3,11 @@
 }
 body {
     background-color: beige;
+    position: relative;
+    top: 15%;
 }
 h1 {
-    max-width: 175px;
+    max-width: 141px;
 }
 #container1 {
     padding: 10px;
@@ -18,17 +20,29 @@ h1 {
     font-size: 14px;
 }
 #container2 {
-    padding: 10px;
+    padding: 0px;
     max-width: 282px;
+}
+#todo-list {
+    max-width: 200px;
+    position: relative;
+    top: 3%;
+    margin-left: 46%;
 }
 #add-todo {
     background-color: green;
+    width: 274px;
+    padding: 5px;
 }
 
 #remove-todo {
     background-color: red;
+    width: 274px;
+    padding: 5px;
 }
 
 #suggest-todo {
     background-color: yellow;
+    width: 274px;
+    padding: 5px;
 }

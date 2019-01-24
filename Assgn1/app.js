@@ -1,23 +1,26 @@
 var addTodo = document.querySelector("#add-todo");
+var todoName = document.querySelector("#todo-name");
 
+
+// Click "ADD" to submit 
 addTodo.onclick = function () {
     var todoList = document.querySelector("#todo-list");
-    var todoName = document.querySelector("#todo-name");
     var newListItem = document.createElement("li");
     newListItem.innerHTML = todoName.value;
     todoList.appendChild(newListItem);
 };
 
-function handleKey(e) {
-    e.preventDefault();
-    if (e.keyCode === 13 ) {
+
+// Enter to submit 
+todoName.addEventListener("keypress", function(event) {
+    if (event.keyCode === 13) {
         var todoList = document.querySelector("#todo-list");
-        var todoName = document.querySelector("#todo-name");
         var newListItem = document.createElement("li");
         newListItem.innerHTML = todoName.value;
         todoList.appendChild(newListItem);
     }
-}
+});
+
 
 fetch("https://api.myjson.com/bins/1gbmos").then(function (response) {
     response.json().then(function (data) {
