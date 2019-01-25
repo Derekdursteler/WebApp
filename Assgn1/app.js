@@ -15,7 +15,7 @@ addTodo.onclick = function () {
     var button = document.createElement("button");
     button.onclick = remove;
     button.id = "removebtn";
-    button.innerHTML = "Completed";
+    button.innerHTML = "Remove";
     newListItem.appendChild(button);
 
     todoName.value='';
@@ -53,7 +53,7 @@ fetch("https://api.myjson.com/bins/1gbmos").then(function (response) {
             var button = document.createElement("button");
             button.onclick = remove;
             button.id = "removebtn";
-	    button.innerHTML = "Completed";
+	    button.innerHTML = "Remove";
 	    newListItem.appendChild(button);
         };
     });
