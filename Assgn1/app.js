@@ -4,12 +4,16 @@ var todoName = document.querySelector("#todo-name");
 
 // Click "ADD" to submit 
 addTodo.onclick = function () {
+    if (todoName.value === "" ) {
+        alert("Must have a todo entered!");
+    } else {
     var todoList = document.querySelector("#todo-list");
     var newListItem = document.createElement("li");
     newListItem.innerHTML = todoName.value;
     todoList.appendChild(newListItem);
+    todoName.value='';
+    }
 };
-
 
 // Enter to submit 
 todoName.addEventListener("keypress", function(event) {
@@ -18,6 +22,7 @@ todoName.addEventListener("keypress", function(event) {
         var newListItem = document.createElement("li");
         newListItem.innerHTML = todoName.value;
         todoList.appendChild(newListItem);
+        todoName.value='';
     }
 });
 
