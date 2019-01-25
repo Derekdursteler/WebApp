@@ -11,9 +11,21 @@ addTodo.onclick = function () {
     var newListItem = document.createElement("li");
     newListItem.innerHTML = todoName.value;
     todoList.appendChild(newListItem);
+
+    var button = document.createElement("button");
+    button.onclick = remove;
+    button.id = "removebtn";
+    button.innerHTML = "Completed";
+    newListItem.appendChild(button);
+
     todoName.value='';
     }
 };
+
+function remove(e) {
+    var el = e.target;
+    el.parentNode.remove();
+}
 
 // Enter to submit 
 todoName.addEventListener("keypress", function(event) {
@@ -37,9 +49,17 @@ fetch("https://api.myjson.com/bins/1gbmos").then(function (response) {
             var newListItem = document.createElement("li");
             newListItem.innerHTML = data[random];
             todoList.appendChild(newListItem);
+
+            var button = document.createElement("button");
+            button.onclick = remove;
+            button.id = "removebtn";
+	    button.innerHTML = "Completed";
+	    newListItem.appendChild(button);
         };
     });
 });
+
+
 
 var removeTodo = document.querySelector("#remove-todo");
 
