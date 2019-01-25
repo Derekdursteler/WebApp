@@ -25,11 +25,12 @@ h1 {
     padding: 0px;
     max-width: 282px;
 }
+#container3 {
+    max-width: 350px;
+}
 #todo-list {
-    max-width: 200px;
-    position: relative;
-    top: 3%;
-    margin-left: 44%;
+    margin-top: 3%;
+    left: 115px;
 }
 
 li {
@@ -84,6 +85,6 @@ li {
 
 }
 #removebtn {
-	margin-left: 10px;
+	float: right;
 }
 

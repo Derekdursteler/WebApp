@@ -29,13 +29,23 @@ function remove(e) {
 
 // Enter to submit 
 todoName.addEventListener("keypress", function(event) {
-    if (event.keyCode === 13) {
-        var todoList = document.querySelector("#todo-list");
-        var newListItem = document.createElement("li");
-        newListItem.innerHTML = todoName.value;
-        todoList.appendChild(newListItem);
-        todoName.value='';
-    }
+	if (event.keyCode === 13) {
+		if (todoName.value === "") {
+			alert("Must have a todo entered!");
+		} else {
+        		var todoList = document.querySelector("#todo-list");
+        		var newListItem = document.createElement("li");
+        		newListItem.innerHTML = todoName.value;
+        		todoList.appendChild(newListItem);
+        		todoName.value='';
+
+			var button = document.createElement("button");
+			button.onclick = remove;
+			button.id = "removebtn";
+			button.innerHTML = "Remove";
+			newListItem.appendChild(button);
+		}
+	}
 });
 
 
