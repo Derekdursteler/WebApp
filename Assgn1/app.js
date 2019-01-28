@@ -11,17 +11,33 @@ addTodo.onclick = function () {
     var newListItem = document.createElement("li");
     newListItem.innerHTML = todoName.value;
     todoList.appendChild(newListItem);
-
+    // remove button on item
     var button = document.createElement("button");
     button.onclick = remove;
     button.id = "removebtn";
     button.innerHTML = "Remove";
     newListItem.appendChild(button);
+    // complete button on item
+    var completebtn = document.createElement("button");
+    completebtn.onclick = completed;
+    completebtn.id = "completebtn";
+    completebtn.innerHTML = "Completed!";
+    newListItem.appendChild(completebtn);
 
     todoName.value='';
     }
 };
 
+// function for complete button 
+function completed(e) {
+    var el = e.target;
+    el.parentNode.setAttribute("style", "text-decoration:line-through;");
+    var completebtn = document.querySelector("#completebtn");
+    completebtn.remove();
+}
+
+
+// function to remove the item
 function remove(e) {
     var el = e.target;
     el.parentNode.remove();
@@ -33,17 +49,23 @@ todoName.addEventListener("keypress", function(event) {
 		if (todoName.value === "") {
 			alert("Must have a todo entered!");
 		} else {
-        		var todoList = document.querySelector("#todo-list");
-        		var newListItem = document.createElement("li");
-        		newListItem.innerHTML = todoName.value;
-        		todoList.appendChild(newListItem);
-        		todoName.value='';
+            var todoList = document.querySelector("#todo-list");
+            var newListItem = document.createElement("li");
+            newListItem.innerHTML = todoName.value;
+            todoList.appendChild(newListItem);
+            todoName.value='';
 
 			var button = document.createElement("button");
 			button.onclick = remove;
 			button.id = "removebtn";
 			button.innerHTML = "Remove";
-			newListItem.appendChild(button);
+            newListItem.appendChild(button);
+            
+            var completebtn = document.createElement("button");
+            completebtn.onclick = completed;
+            completebtn.id = "completebtn";
+            completebtn.innerHTML = "Completed!";
+            newListItem.appendChild(completebtn);
 		}
 	}
 });
@@ -63,8 +85,14 @@ fetch("https://api.myjson.com/bins/1gbmos").then(function (response) {
             var button = document.createElement("button");
             button.onclick = remove;
             button.id = "removebtn";
-	    button.innerHTML = "Remove";
-	    newListItem.appendChild(button);
+	        button.innerHTML = "Remove";
+            newListItem.appendChild(button);
+            
+            var completebtn = document.createElement("button");
+            completebtn.onclick = completed;
+            completebtn.id = "completebtn";
+            completebtn.innerHTML = "Completed!";
+            newListItem.appendChild(completebtn);
         };
     });
 });

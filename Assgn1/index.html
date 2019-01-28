@@ -6,13 +6,14 @@
     </head>
     
     <body>
+        <div id="maincontainer">
         <h1>To-Do List</h1>
             
             <div id=container1>
                 <input type="text" id="todo-name" placeholder="Enter a todo" required>
             </div>
             <div id="container2">
-            <button id="add-todo" onclick="requiredFunction()">Add</button>
+            <button id="add-todo">Add</button>
             <button id="suggest-todo">Random Suggestion</button>
             <button id="remove-todo">Remove First Item</button>
             
@@ -21,7 +22,9 @@
             <ul id="todo-list">
 
             </ul>
-	    </div>
+        </div>
+        
+    </div>
         <script src="app.js"></script>
     </body>
 </html>

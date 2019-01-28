@@ -1,14 +1,21 @@
 * {
     margin: auto;
 }
-body {
-    background-color: #c9af98;
-    position: relative;
-    top: 15%;
+#maincontainer {
+    background-color: #FEF0CA;
+    width: 600px;
+    height: 100%;
+    padding-top: 120px;
+    box-shadow: 0px 0px 30px 10px;
 }
 h1 {
     max-width: 154px;
 }
+
+body {
+    background-color: #C3D1AE;
+}
+
 #container1 {
     max-width: 282px;
 }
@@ -26,7 +33,7 @@ h1 {
     max-width: 282px;
 }
 #container3 {
-    max-width: 350px;
+    max-width: 400px;
 }
 #todo-list {
     margin-top: 3%;
@@ -53,9 +60,9 @@ li {
 }
 
 #remove-todo {
-    background-color:#3a4660;
+    background-color:#628D88;
 	border-radius:28px;
-	border:1px solid #3a4660;
+	border:1px solid #628D88;
 	display:inline-block;
 	cursor:pointer;
 	color:#ffffff;
@@ -84,6 +91,11 @@ li {
     width: 274px;
 
 }
+
+#completebtn {
+    float: right;
+}
+
 #removebtn {
 	float: right;
 }
