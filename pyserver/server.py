@@ -1,4 +1,5 @@
 from http.server import BaseHTTPRequestHandler, HTTPServer
+from urllib.parse import parse_qs
 import json
 
 RESTAURANTS = ["Panda", "Lobsters", "Alfredo's"]
@@ -20,9 +21,17 @@ class MyRequestHandler(BaseHTTPRequestHandler):
         if self.path == "/restaurants":
             length = self.headers["Content-length"]
             body = self.rfile.read(int(length)).decode("utf-8")
-            print("the body", body)
+            print("the text body", body)
+            parsed_body = parse_qs(body)
+            print("the parsed body:", parsed_body)
+            
+            # save the restaurant!
+            RESTAURANTS.append(parsed_body["name"][0])
+
+            self.send_respone(201)
+            send.end_headers()
         else:
-            self.send_respone(404)
+            self.send_response(404)
             self.end_headers()
         return
 
