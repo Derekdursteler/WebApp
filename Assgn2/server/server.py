@@ -2,18 +2,24 @@ from http.server import BaseHTTPRequestHandler, HTTPServer
 from urllib.parse import parse_qs
 import json
 
-BUCKETLIST = ["Thailand", "Germany", "Sweden", "Dominican Republic"]
+BUCKETLIST = []
 
 class MyRequestHandler( BaseHTTPRequestHandler ):
 
     def do_GET( self ):
-        if self.path == "/bucket":
+        if self.path == "/destinations":
             self.send_response( 200 )
             # headers
             self.send_header( "Content-type", "application/json" )
             self.send_header( "Access-Control-Allow-Origin", "*" )
             self.end_headers()
             # read file here
+            BUCKETLIST = []
+            fin = open("destinations.txt", "r")
+            for line in fin:
+                line = line.strip()
+                BUCKETLIST.append(line)
+            fin.close()
             self.wfile.write( bytes( json.dumps( BUCKETLIST ), "utf-8" ) )
         else:
             self.send_response( 404 )
@@ -21,14 +27,17 @@ class MyRequestHandler( BaseHTTPRequestHandler ):
         return
 
     def do_POST( self ):
-        if self.path == "/bucket":
+        if self.path == "/destinations":
             length = self.headers[ "Content-length" ]
             body = self.rfile.read( int( length ) ).decode( "utf-8" )
             parsed_body = parse_qs( body )
-            print( parsed_body )
+            # print( parsed_body )
             # save bucketlist item
             BUCKETLIST.append( parsed_body[ "name" ][ 0 ])
-            # write to file here 
+            # write to file here
+            fout = open("destinations.txt", "a")
+            fout.write(parsed_body["name"][0] + "\n")
+            fout.close()
             self.send_response( 201 )
             self.send_header( "Access-Control-Allow-Origin", "*" )
             self.end_headers( )

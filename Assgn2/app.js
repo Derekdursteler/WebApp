@@ -5,7 +5,7 @@ var button = document.querySelector( "#button1" );
 var addItem = function( ) {
     var value = document.querySelector( "#name" ).value;
     var data = "name=" + encodeURIComponent( value );
-    fetch( "http://localhost:8080/bucket", {
+    fetch( "http://localhost:8080/destinations", {
         method: 'POST',
         body: data,
         headers: {
@@ -14,7 +14,6 @@ var addItem = function( ) {
     }).then( function ( response ) {
         getSuggestions( );
     });
-    namevalue.innerHTML = "";
 }
 // enter to add item
 namevalue.addEventListener("keypress", function(event) {
@@ -23,16 +22,18 @@ namevalue.addEventListener("keypress", function(event) {
 			alert("Must have a bucket-list item entered!");
 		} else {
             addItem( );
+            namevalue.value = "";
         }
     }
 })
 // onlick to add item
 button.onclick = function( ) {
    addItem( );
+   namevalue.value = "";
 };
 
 var getSuggestions = function( ) {
-    fetch( "http://localhost:8080/bucket" ).then( function ( response ) {
+    fetch( "http://localhost:8080/destinations" ).then( function ( response ) {
         response.json( ).then( function ( data ) {
             // save data into global variable so we can use later if we need too
             suggestions = data;

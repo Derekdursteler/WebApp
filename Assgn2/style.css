@@ -1,0 +1,13 @@
+#maincontainer {
+  text-align:center;
+  display:inline-block;
+  width: 100%;
+}
+#listcontainer {
+  width: 50%;
+}
+
+ol {
+  display:table;
+  margin:0 auto;
+}
