@@ -3,11 +3,18 @@
   display:inline-block;
   width: 100%;
 }
+#boxcontainer{
+  background-color: aliceblue;
+  height: 100%;
+  width: 500px;
+  display: inline-block;
+}
 #listcontainer {
   width: 50%;
 }
 
-ol {
-  display:table;
+ul {
+  text-decoration: none;
+  display: table;
   margin:0 auto;
 }
