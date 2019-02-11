@@ -2,7 +2,7 @@ from http.server import BaseHTTPRequestHandler, HTTPServer
 from urllib.parse import parse_qs
 import json
 
-BUCKETLIST = ["Thailand, Germany, Sweden, Dominican Republic"]
+BUCKETLIST = ["Thailand", "Germany", "Sweden", "Dominican Republic"]
 
 class MyRequestHandler( BaseHTTPRequestHandler ):
 
@@ -21,6 +21,20 @@ class MyRequestHandler( BaseHTTPRequestHandler ):
         return
 
     def do_POST( self ):
+        if self.path == "/bucket":
+            length = self.headers[ "Content-length" ]
+            body = self.rfile.read( int( length ) ).decode( "utf-8" )
+            parsed_body = parse_qs( body )
+            print( parsed_body )
+            # save bucketlist item
+            BUCKETLIST.append( parsed_body[ "name" ][ 0 ])
+            # write to file here 
+            self.send_response( 201 )
+            self.send_header( "Access-Control-Allow-Origin", "*" )
+            self.end_headers( )
+        else:
+            self.send_response( 404 )
+            self.end_headers( )
         return
 
 def run( ):
