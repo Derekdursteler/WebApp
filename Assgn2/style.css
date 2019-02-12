@@ -1,20 +1,49 @@
+body {
+  background-image: url("picture.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
 #maincontainer {
   text-align:center;
   display:inline-block;
   width: 100%;
 }
+
 #boxcontainer{
-  background-color: aliceblue;
-  height: 100%;
+  margin-top: 6%;
+  background: rgb(255,255,255,0.2);
+  height: 400px;
   width: 500px;
   display: inline-block;
+  padding: 10px;
+  border-radius: 15px;
 }
+
+#test {
+  padding: 15px;
+}
+
+.suggestion {
+  padding: 10px;
+}
+
 #listcontainer {
   width: 50%;
 }
 
-ul {
+input {
+  width: 300px;
+  height: 30px;
+  text-align: center;
+  border-radius: 15px;
+  background: rgb(255,255,255, 0.8);
+}
+
+li {
   text-decoration: none;
   display: table;
   margin:0 auto;
+  list-style-type: none;
 }

@@ -44,7 +44,7 @@ var getSuggestions = function( ) {
             places.innerHTML = "";
 
             data.forEach( function ( suggestion ) {
-                var newListItem = document.createElement( "li" );
+                var newListItem = document.createElement( "div" );
                 newListItem.innerHTML = suggestion;
                 newListItem.className = "suggestion";
                 places.appendChild( newListItem );
