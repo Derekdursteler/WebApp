@@ -1,6 +1,8 @@
 var suggestions = null;
 var namevalue = document.querySelector( "#name" );
 var button = document.querySelector( "#button1" );
+// var deletebutton = document.querySelector( "#button2" );
+
 
 var addItem = function( ) {
     var value = document.querySelector( "#name" ).value;

@@ -46,6 +46,17 @@ class MyRequestHandler( BaseHTTPRequestHandler ):
             self.end_headers( )
         return
 
+    def do_DELETE( self ):
+        if self.path == "/destinations":
+            fin = open("destinations.txt", "w")
+            fin.close()
+            self.send_response(200)
+            self.end_headers()
+        else:
+            self.send_response(404)
+            self.end_headers()
+        return
+
 def run( ):
     listen = ( "127.0.0.1", 8080 )
     server = HTTPServer( listen, MyRequestHandler )

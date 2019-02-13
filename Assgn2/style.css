@@ -19,7 +19,7 @@ body {
   font-size: 26px;
 }
 
-#button1 {
+#button1, #button2 {
   padding: 8px;
   width: 100px;
   font-size: 14px;
