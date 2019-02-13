@@ -23,7 +23,7 @@ class MyRequestHandler( BaseHTTPRequestHandler ):
             self.wfile.write( bytes( json.dumps( BUCKETLIST ), "utf-8" ) )
         else:
             self.send_response( 404 )
-            self.end_headers
+            self.end_headers()
         return
 
     def do_POST( self ):
