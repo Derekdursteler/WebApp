@@ -23,7 +23,9 @@ class MyRequestHandler( BaseHTTPRequestHandler ):
             self.wfile.write( bytes( json.dumps( BUCKETLIST ), "utf-8" ) )
         else:
             self.send_response( 404 )
+            self.send_header("Content-type", "Text/Plain")
             self.end_headers()
+            self.wfile.write( bytes( "File not found", "utf-8" ) )
         return
 
     def do_POST( self ):
@@ -43,7 +45,9 @@ class MyRequestHandler( BaseHTTPRequestHandler ):
             self.end_headers( )
         else:
             self.send_response( 404 )
+            self.send_header( "Content-type", "Text/Plain")
             self.end_headers( )
+            self.wfile.write( bytes( "Illegal POST Request", "utf-8" ) )
         return
 
     def do_DELETE( self ):
