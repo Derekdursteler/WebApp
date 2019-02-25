@@ -7,7 +7,7 @@ BUCKETLIST = []
 class MyRequestHandler( BaseHTTPRequestHandler ):
 
     def do_GET( self ):
-        if self.path == "/destinations":
+        if self.path == "/entries":
             self.send_response( 200 )
             # headers
             self.send_header( "Content-type", "application/json" )
@@ -15,7 +15,7 @@ class MyRequestHandler( BaseHTTPRequestHandler ):
             self.end_headers()
             # read file here
             BUCKETLIST = []
-            fin = open("destinations.txt", "r")
+            fin = open("entries.txt", "r")
             for line in fin:
                 line = line.strip()
                 BUCKETLIST.append(line)
@@ -29,16 +29,16 @@ class MyRequestHandler( BaseHTTPRequestHandler ):
         return
 
     def do_POST( self ):
-        if self.path == "/destinations":
+        if self.path == "/entries":
             length = self.headers[ "Content-length" ]
             body = self.rfile.read( int( length ) ).decode( "utf-8" )
             parsed_body = parse_qs( body )
             # print( parsed_body )
             # save bucketlist item
-            BUCKETLIST.append( parsed_body[ "name" ][ 0 ])
+            BUCKETLIST.append( parsed_body[ "entry" ][ 0 ])
             # write to file here
-            fout = open("destinations.txt", "a")
-            fout.write(parsed_body["name"][0] + "\n")
+            fout = open("entries.txt", "a")
+            fout.write(parsed_body["entry"][0] + "\n")
             fout.close()
             self.send_response( 201 )
             self.send_header( "Access-Control-Allow-Origin", "*" )
@@ -51,8 +51,8 @@ class MyRequestHandler( BaseHTTPRequestHandler ):
         return
 
     def do_DELETE( self ):
-        if self.path == "/destinations":
-            fin = open("destinations.txt", "w")
+        if self.path == "/entries":
+            fin = open("entries.txt", "w")
             fin.close()
             self.send_response(200)
             self.end_headers()
