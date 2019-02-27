@@ -26,4 +26,8 @@ class RestaurantDB:
     def getAllRestaurants(self):
         self.cursor.execute("SELECT * FROM restaurants")
         return self.cursor.fetchall()
-        # cursor.fetchone()
+    
+    def getRestaurant(self, id):
+        sql = self.cursor.execute("SELECT * FROM restaurants WHERE id =?")
+        self.cursor.execute(sql, [id])
+        return self.cursor.fetchone()

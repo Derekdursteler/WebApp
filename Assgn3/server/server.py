@@ -1,0 +1,87 @@
+from http.server import BaseHTTPRequestHandler, HTTPServer
+from urllib.parse import parse_qs
+import json
+from entries_db import JournalDB
+
+class MyRequestHandler( BaseHTTPRequestHandler ):
+
+    def handleJournalsList(self):
+        self.send_response(200)
+        self.send_header("Content-type", "application/json")
+        self.send_header("Access-Control-Allow-Origin", "*")
+        self.end_headers()
+        db = JournalDB()
+        entries = db.getAllEntries()
+        self.wfile.write(bytes(json.dumps(entries), "utf-8"))
+        return
+
+    def handleJournalsCreate(self):
+        length = self.headers["Content-length"]
+        body = self.rfile.read(int(length)).decode("utf-8")
+        parsed_body = parse_qs(body)
+
+        title = parsed_body["title"][0]
+        contents = parsed_body["contents"][0]
+        date = parsed_body["date"][0]
+        weather = parsed_body["weather"][0]
+        location = parsed_body["location"][0]
+        # send these values to the database
+        # call db.createEntry() right here and fill in the fields
+        print(title, contents, date, weather, location)
+
+        self.send_response(201)
+        self.send_header("Access-Control-Allow-Origin", "*")
+        self.end_headers()
+
+    def handleJournalsRetrieve(self, id):
+        db = JournalDB()
+        entry = db.getEntry(id)
+        if entry == None:
+            self.handleNotFound()
+        else:
+            self.send_response(200)
+            self.send_header("Content-type", "application/json")
+            self.send_header("Access-Control-Allow-Origin", "*")
+            self.end_headers()
+            self.wfile.write(bytes(json.dumps(entry), "utf-8"))
+        return
+    
+    def handleNotFound(self):
+        self.send_response(404)
+        self.send_header("Content-type", "Text/Plain")
+        self.end_headers()
+        self.wfile.write( bytes("Not found", "utf-8") )
+        return
+
+    def do_GET( self ):
+        # parse the path to find the collectio and identifier
+        parts = self.path.split('/')[1:]
+        collection = parts[0]
+        if len(parts) > 1:
+            id = parts[1]
+        else:
+            id = None
+
+        if collection == "journal":
+            if id == None:
+                self.handleJournalsList()
+            else:
+                self.handleJournalsRetrieve(id)
+        else:
+            self.handleNotFound()
+        return
+    
+    def do_POST( self ):
+        if self.path == "/journal":
+            self.handleJournalsCreate() 
+        else:
+            self.handleNotFound()
+        return
+
+def run():
+    listen = ("127.0.0.1", 8080)
+    server = HTTPServer( listen, MyRequestHandler )
+    print( "Server is doing it" )
+    server.serve_forever()
+
+run()
