@@ -8,6 +8,7 @@ var submitbutton = document.querySelector( "#submit" );
 
 var addItem = function() {
     var value = title.value;
+    console.log(value);
     var data = "title=" + encodeURIComponent(value);
     fetch("http://localhost:8080/journal", {
         method: 'POST',
@@ -30,7 +31,12 @@ var getJournalEntries = function() {
             data.forEach(function(journal) {
                 var newListItem = document.createElement("li");
                 console.log(journal, "journal"); 
-                newListItem.innerHTML = "Title: " + journal["title"] + "<br>Contents: " + journal["contents"];
+                newListItem.innerHTML = 
+                  "Title: " + journal["title"] 
+                + "<br>Contents: " + journal["contents"] 
+                + "<br>Date: " + journal["date"]
+                + "<br>Weather: " + journal["weather"]
+                + "<br>Location: " + journal["location"];
                 newListItem.className = "entry";
                 journalList.appendChild(newListItem);
             })
