@@ -18,7 +18,9 @@ class MyRequestHandler( BaseHTTPRequestHandler ):
     def handleJournalsCreate(self):
         length = self.headers["Content-length"]
         body = self.rfile.read(int(length)).decode("utf-8")
+        print("the text body:", body)
         parsed_body = parse_qs(body)
+        print("the parsed body:", parsed_body)
 
         title = parsed_body["title"][0]
         contents = parsed_body["contents"][0]

@@ -3,7 +3,7 @@ var title = document.querySelector( "#title" );
 var contents = document.querySelector( "#content" );
 var date = document.querySelector( "#date" );
 var weather = document.querySelector( "#weather" );
-var location = document.querySelector( "#location" );
+var place = document.querySelector( "#place" );
 var submitbutton = document.querySelector( "#submit" );
 
 var addItem = function() {
@@ -24,12 +24,13 @@ var getJournalEntries = function() {
     fetch("http://localhost:8080/journal").then(function(response) {
         response.json().then(function(data) {
             journal = data;
-
-            var journalList = document.querySelector("#journal_list");
+            console.log(journal);
+            var journalList = document.querySelector("#journallist");
             journalList.innerHTML = "";
             data.forEach(function(journal) {
-                var newListItem = document.createElement("#div");
-                newListItem.innerHTML = suggestion;
+                var newListItem = document.createElement("li");
+                console.log(journal, "journal"); 
+                newListItem.innerHTML = "Title: " + journal["title"] + "<br>Contents: " + journal["contents"];
                 newListItem.className = "entry";
                 journalList.appendChild(newListItem);
             })
@@ -55,4 +56,4 @@ title.addEventListener("keypress", function(event) {
     }
 })
 
-getSuggestions();
+getJournalEntries();
