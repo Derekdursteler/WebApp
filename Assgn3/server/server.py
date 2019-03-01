@@ -19,6 +19,7 @@ class MyRequestHandler( BaseHTTPRequestHandler ):
         length = self.headers["Content-length"]
         body = self.rfile.read(int(length)).decode("utf-8")
         print("the text body:", body)
+        # parse_qs was imported and returns a dictionary
         parsed_body = parse_qs(body)
         print("the parsed body:", parsed_body)
 
@@ -28,12 +29,15 @@ class MyRequestHandler( BaseHTTPRequestHandler ):
         weather = parsed_body["weather"][0]
         location = parsed_body["location"][0]
         # send these values to the database
+        db = JournalDB()
         # call db.createEntry() right here and fill in the fields
+        db.createEntry(title, contents, date, weather, location)
         print(title, contents, date, weather, location)
 
         self.send_response(201)
         self.send_header("Access-Control-Allow-Origin", "*")
         self.end_headers()
+        return
 
     def handleJournalsRetrieve(self, id):
         db = JournalDB()
@@ -52,10 +56,17 @@ class MyRequestHandler( BaseHTTPRequestHandler ):
         self.send_response(404)
         self.send_header("Content-type", "Text/Plain")
         self.end_headers()
-        self.wfile.write( bytes("Not found", "utf-8") )
+        self.wfile.write(bytes("Not found", "utf-8"))
         return
+    
+    def do_OPTIONS(self):
+        self.send_response(200)
+        self.send_header("Access-Control-Allow-Origin", "*")
+        self.send_header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
+        self.send_header("Access-Control-Allow-Headers", "Content-type")
+        self.end_headers()
 
-    def do_GET( self ):
+    def do_GET(self):
         # parse the path to find the collectio and identifier
         parts = self.path.split('/')[1:]
         collection = parts[0]
@@ -73,7 +84,7 @@ class MyRequestHandler( BaseHTTPRequestHandler ):
             self.handleNotFound()
         return
     
-    def do_POST( self ):
+    def do_POST(self):
         if self.path == "/journal":
             self.handleJournalsCreate() 
         else:

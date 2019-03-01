@@ -28,14 +28,13 @@ class MyRequestHandler(BaseHTTPRequestHandler):
 
         # save the restaurant!
         
-        # read the data
-        # name = parsed_body["name"][0]
-        # cuisine = parsed_body["cuisine"][0]
-        # hours = parsed_body["hours"][0]
-        # rating = parsed_body["rating"][0]
-
         # send these values to the database
-        # call db.createRestaurant() right here and fill in the fields
+        name = parsed_body["name"][0]
+        cuisine = parsed_body["cuisine"][0]
+        #hours = parsed_body["hours"][0]
+        #rating = parsed_body["rating"][0]
+        db = RestaurantDB()
+        db.createRestaurant(name, cuisine, "", "")
 
         self.send_response(201)
         self.send_header("Access-Control-Allow-Origin", "*")
@@ -60,6 +59,13 @@ class MyRequestHandler(BaseHTTPRequestHandler):
         self.end_headers()
         self.wfile.write( bytes("Not found", "utf-8") )
         return
+
+    def do_OPTIONS(self):
+        self.send_response(200)
+        self.send_header("Access-Control-Allow-Origin", "*")
+        self.send_header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
+        self.send_header("Access-Control-Allow-Headers", "Content-type")
+        self.end_headers()
 
     def do_GET(self):
         #parse the path to find the collection and identifier

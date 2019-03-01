@@ -4,8 +4,15 @@ var lunchPlaces = null;
 var theButton = document.querySelector("#the-button");
 console.log("the button is", theButton);
 theButton.onclick = function () {
-  var value = "Applebees";
-  var data = "name=" + encodeURIComponent(value);
+  var nameInput = document.querySelector("#name");
+  var cuisineInput = document.querySelector("#cuisine");
+
+  var name = nameInput.value;
+  var cuisine = cuisineInput.value;
+  
+  var data = "name=" + encodeURIComponent(name);
+  data += "&cuisine=" + encodeURIComponent(cuisine);
+  
   fetch("http://localhost:8080/restaurants", {
     method: 'POST',
     body: data,

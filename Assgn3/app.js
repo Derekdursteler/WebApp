@@ -1,15 +1,25 @@
 var journal = null;
-var title = document.querySelector( "#title" );
-var contents = document.querySelector( "#content" );
-var date = document.querySelector( "#date" );
-var weather = document.querySelector( "#weather" );
-var place = document.querySelector( "#place" );
-var submitbutton = document.querySelector( "#submit" );
+var submitbutton = document.querySelector("#submit");
 
 var addItem = function() {
-    var value = title.value;
+    var titleInput = document.querySelector("#title");
+    var contentsInput = document.querySelector("#content");
+    var dateInput = document.querySelector("#date");
+    var weatherInput = document.querySelector("#weather");
+    var placeInput = document.querySelector("#place");
+
+    var title = titleInput.value;
+    var contents = contentsInput.value;
+    var date = dateInput.value;
+    var weather = weatherInput.value;
+    var place = placeInput.value;
+
     console.log(value);
-    var data = "title=" + encodeURIComponent(value);
+    var data = "title=" + encodeURIComponent(title);
+    data += "&contents=" + encodeURIComponent(contents);
+    data += "&date=" + encodeURIComponent(date);
+    data += "&weather=" + encodeURIComponent(weather);
+    data += "&place=" + encodeURIComponent(place);
     fetch("http://localhost:8080/journal", {
         method: 'POST',
         body: data,
@@ -17,6 +27,7 @@ var addItem = function() {
             "Content-type": "application/x-www-form-urlencoded"
         }
     }).then(function(response) {
+        console.log("journal entry saved");
         getJournalEntries();
     });
 }

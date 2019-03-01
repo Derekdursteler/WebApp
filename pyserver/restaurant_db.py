@@ -18,9 +18,9 @@ class RestaurantDB:
         self.connection.close()
 
     def createRestaurant(self, name, cuisine, hours, rating):
-        sql = "INSERT INTO restaurants (name, cuisine, hours, ratings) VALUES (?, ?, ?, ?)" # Use ? for placeholder so the client can't do sql injections
+        sql = "INSERT INTO restaurants (name, cuisine, hours, rating) VALUES (?, ?, ?, ?)" # Use ? for placeholder so the client can't do sql injections
         self.cursor.execute(sql, [name, cuisine, hours, rating]) # The list of variables is data-binding and makes it so the sql injection can't happen, the database takes the value literally
-        self.cursor.commit()
+        self.connection.commit()
         return
 
     def getAllRestaurants(self):
@@ -29,5 +29,5 @@ class RestaurantDB:
     
     def getRestaurant(self, id):
         sql = self.cursor.execute("SELECT * FROM restaurants WHERE id =?")
-        self.cursor.execute(sql, [id])
+        self.cursor.execute(sql, [id]) # data must be a list
         return self.cursor.fetchone()
