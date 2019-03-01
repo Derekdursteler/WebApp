@@ -1,0 +1,30 @@
+body {
+    background-color: #20639B;
+}
+
+.wrapper {
+    margin-right: auto;
+    margin-left:  auto;
+    max-width: 960px;
+    padding-right: 10px;
+    padding-left:  10px;
+    background-color: white;
+}
+
+h1 {
+    text-align: center;
+}
+
+#title, #date, #weather, #place {
+    width: 35%;
+    text-align: center;
+    display: block;
+    margin: 0 auto;
+}
+
+#content {
+    width: 90%;
+    text-align: center;
+    display: block;
+    margin: 0 auto;
+}
