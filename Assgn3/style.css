@@ -15,7 +15,7 @@ h1 {
     text-align: center;
 }
 
-#title, #date, #weather, #place {
+#title, #date, #weather, #location {
     width: 35%;
     text-align: center;
     display: block;

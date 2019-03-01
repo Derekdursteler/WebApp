@@ -20,13 +20,12 @@ class JournalDB:
     def createEntry(self, title, contents, date, weather, location):
         sql = "INSERT INTO journals (title, contents, date, weather, location) VALUES (?, ?, ?, ?, ?)" # Use ? for placeholder so the client can't do sql injections
         self.cursor.execute(sql, [title, contents, date, weather, location]) # The list of variables is data-binding and makes it so the sql injection can't happen, the database takes the value literally
-        self.cursor.commit()
+        self.connection.commit()
         return
 
     def getAllEntries(self):
         self.cursor.execute("SELECT * FROM journals")
         return self.cursor.fetchall()
-        # cursor.fetchone()
         
     def getEntry(self, id):
         sql = self.cursor.execute("SELECT * FROM journals WHERE id =?")

@@ -3,7 +3,7 @@ from urllib.parse import parse_qs
 import json
 from entries_db import JournalDB
 
-class MyRequestHandler( BaseHTTPRequestHandler ):
+class MyRequestHandler(BaseHTTPRequestHandler):
 
     def handleJournalsList(self):
         self.send_response(200)

@@ -1,25 +1,25 @@
 var journal = null;
-var submitbutton = document.querySelector("#submit");
+var submitButton = document.querySelector("#submit");
 
 var addItem = function() {
     var titleInput = document.querySelector("#title");
     var contentsInput = document.querySelector("#content");
     var dateInput = document.querySelector("#date");
     var weatherInput = document.querySelector("#weather");
-    var placeInput = document.querySelector("#place");
+    var locationInput = document.querySelector("#location");
 
     var title = titleInput.value;
     var contents = contentsInput.value;
     var date = dateInput.value;
     var weather = weatherInput.value;
-    var place = placeInput.value;
+    var location = locationInput.value;
 
-    console.log(value);
+    console.log(title, contents, date, weather, location);
     var data = "title=" + encodeURIComponent(title);
     data += "&contents=" + encodeURIComponent(contents);
     data += "&date=" + encodeURIComponent(date);
     data += "&weather=" + encodeURIComponent(weather);
-    data += "&place=" + encodeURIComponent(place);
+    data += "&location=" + encodeURIComponent(location);
     fetch("http://localhost:8080/journal", {
         method: 'POST',
         body: data,
@@ -56,13 +56,13 @@ var getJournalEntries = function() {
 }
 
 // OnClick to add item
-submitbutton.onlick = function() {
+submitButton.onclick = function() {
+    console.log("submit button clicked!");
     addItem();
-    title.value = "";
 }
 
 // make it so enter submit item
-title.addEventListener("keypress", function(event) {
+/* title.addEventListener("keypress", function(event) {
     if (event.keyCode === 13) {
         if (title.value === "") {
             alert("Must have all fields entered!");
@@ -71,6 +71,6 @@ title.addEventListener("keypress", function(event) {
             title.value = "";
         }
     }
-})
+}) */
 
 getJournalEntries();
