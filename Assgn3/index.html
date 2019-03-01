@@ -6,22 +6,26 @@
     </head>
         <body>
           <div class="wrapper">
-            <div id="boxcontainer">
-                <h1>Daily Journal</h1>
-                <div id="padding">
-                    <input type="text" id="title" placeholder="Title"><br><br>
-                    <input type="text" id="content" placeholder="Enter your days thoughts/activities/etc" required><br><br>
-                    <input type="date" id="date"><br><br>
-                    <input type="text" id="weather" placeholder="weather"><br><br>
+              <h1>Daily Journal</h1>
+              <div id="padding">
+
+                  <div id="titledatecontainer">
+                    <input type="date" id="date">
+                    <input type="text" id="title" placeholder="Title">
+                  </div>
+
+                  <div id="weatherlocationcontainer">
+                    <input type="text" id="weather" placeholder="weather">
                     <input type="text" id="location" placeholder="location">
-                    
+                  </div>
+
+                    <textarea type="text" id="content" placeholder="Enter your days thoughts/activities/etc" required></textarea>
                 </div>
                 <button id="submit">Submit</button>
                 <!-- button id="clear">Clear List</button> !-->
                 <ul id="journallist">
 
                 </ul>
-                </div>
               </div>
             <script src="app.js"></script>
         </body>

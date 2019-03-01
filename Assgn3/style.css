@@ -15,16 +15,44 @@ h1 {
     text-align: center;
 }
 
-#title, #date, #weather, #location {
-    width: 35%;
+#titledatecontainer {
+    width: 95%;
+}
+
+#title {
     text-align: center;
-    display: block;
-    margin: 0 auto;
+    width: 35%;
+    float: right;
+}
+
+#date {
+    text-align: center;
+    width: 35%;
+    float: right;
+}
+
+#weatherlocationcontainer {
+    width: 95%;
+    clear:both;
+}
+
+#weather {
+    text-align: center;
+    width: 35%;
+    float: right;
+}
+
+#location {
+    text-align: center;
+    width: 35%;
+    float: right;
 }
 
 #content {
     width: 90%;
-    text-align: center;
+    text-align:left;
     display: block;
     margin: 0 auto;
+    height: 250px;
+    
 }
