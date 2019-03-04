@@ -1,7 +1,7 @@
 var journal = null;
 var submitButton = document.querySelector("#submit");
 
-var addItem = function() {
+var createJournalEntry = function() {
     var titleInput = document.querySelector("#title");
     var contentsInput = document.querySelector("#content");
     var dateInput = document.querySelector("#date");
@@ -32,33 +32,69 @@ var addItem = function() {
     });
 }
 
+var deleteJournal = function (id) {
+    fetch(`http://localhost:8080/journal/${id}`, {
+        method: 'DELETE'
+    }).then(function(response) {
+        console.log("journal deleted.")
+        getJournalEntries();
+    })
+}
 var getJournalEntries = function() {
     fetch("http://localhost:8080/journal").then(function(response) {
         response.json().then(function(data) {
             journal = data;
-            console.log(journal);
+            //console.log(journal);
             var journalList = document.querySelector("#journallist");
             journalList.innerHTML = "";
             data.forEach(function(journal) {
                 var newListItem = document.createElement("li");
-                console.log(journal, "journal"); 
-                newListItem.innerHTML = 
-                  "Title: " + journal.title
-                + "<br>Contents: " + journal.contents
-                + "<br>Date: " + journal.date
-                + "<br>Weather: " + journal.weather
-                + "<br>Location: " + journal.location;
-                newListItem.className = "entry";
+                //console.log(journal, "journal");
+                var titleDiv = document.createElement("div");
+                titleDiv.innerHTML = journal.title;
+                titleDiv.className = "journal-title";
+                newListItem.appendChild(titleDiv);
+
+                var contentsDiv = document.createElement("div");
+                contentsDiv.innerHTML = journal.contents;
+                contentsDiv.className = "journal-contents";
+                newListItem.appendChild(contentsDiv);
+
+                var dateDiv = document.createElement("div");
+                dateDiv.innerHTML = journal.date;
+                dateDiv.className = "journal-date";
+                newListItem.appendChild(dateDiv);
+
+                var weatherDiv = document.createElement("div");
+                weatherDiv.innerHTML = journal.weather;
+                weatherDiv.className = "journal-weather";
+                newListItem.appendChild(weatherDiv);
+
+                var locationDiv = document.createElement("div");
+                locationDiv.innerHTML = journal.location;
+                locationDiv.className = "journal-location";
+                newListItem.appendChild(locationDiv);
+
+                var deleteButton = document.createElement("button");
+                deleteButton.innerHTML = "Delete";
+                deleteButton.onclick = function() {
+                    var proceed = confirm(`Do you want to delete ${journal.title}?`);
+                    if (proceed) {
+                        deleteJournal(journal.id);
+                    }
+                };
+                newListItem.appendChild(deleteButton);
+
                 journalList.appendChild(newListItem);
-            })
-        })
-    })
+            });
+        });
+    });
 }
 
 // OnClick to add item
 submitButton.onclick = function() {
-    console.log("submit button clicked!");
-    addItem();
+    // console.log("submit button clicked!");
+    createJournalEntry();
 }
 
 // make it so enter submit item

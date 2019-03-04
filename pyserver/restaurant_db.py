@@ -31,3 +31,9 @@ class RestaurantDB:
         sql = self.cursor.execute("SELECT * FROM restaurants WHERE id =?")
         self.cursor.execute(sql, [id]) # data must be a list
         return self.cursor.fetchone()
+
+    def deleteRestaurant(self, id):
+        sql = "DELETE FROM restaurants WHERE id = (?)"
+        self.cursor.execute(sql, [id])
+        self.connection.commit()
+        return

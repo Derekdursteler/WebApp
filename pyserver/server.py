@@ -53,6 +53,13 @@ class MyRequestHandler(BaseHTTPRequestHandler):
             self.wfile.write(bytes(json.dumps(restaurant), "utf-8"))
         return
 
+    def handleRestaurantsDelete(self, id):
+        db = RestaurantDB()
+        db.deleteRestaurant(id)
+        self.send_response(200)
+        self.send_header("Access-Control-Allow-Origin", "*")
+        self.end_headers()
+
     def handleNotFound(self):
         self.send_response(404)
         self.send_header("Content-type", "Text/Plain")
@@ -92,6 +99,24 @@ class MyRequestHandler(BaseHTTPRequestHandler):
         else:
             self.handleNotFound()
         return
+
+    def do_DELETE(self):
+        parts = self.path.split('/')[1:]
+        collection = parts[0]
+        if len(parts) > 1:
+            id = parts[1]
+        else:
+            id = None
+
+        if collection == "restaurants":
+            if id == None:
+                self.handleNotFound
+            else:
+                self.handleRestaurantsDelete(id)
+        else:
+            self.handleNotFound()
+        return
+
 
 
 def run():

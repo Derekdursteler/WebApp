@@ -58,6 +58,9 @@ class MyRequestHandler(BaseHTTPRequestHandler):
         self.end_headers()
         self.wfile.write(bytes("Not found", "utf-8"))
         return
+
+    def handleJournalsDelete(self, id):
+        db = JournalDB()
     
     def do_OPTIONS(self):
         self.send_response(200)
