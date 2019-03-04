@@ -43,11 +43,11 @@ var getJournalEntries = function() {
                 var newListItem = document.createElement("li");
                 console.log(journal, "journal"); 
                 newListItem.innerHTML = 
-                  "Title: " + journal["title"] 
-                + "<br>Contents: " + journal["contents"] 
-                + "<br>Date: " + journal["date"]
-                + "<br>Weather: " + journal["weather"]
-                + "<br>Location: " + journal["location"];
+                  "Title: " + journal.title
+                + "<br>Contents: " + journal.contents
+                + "<br>Date: " + journal.date
+                + "<br>Weather: " + journal.weather
+                + "<br>Location: " + journal.location;
                 newListItem.className = "entry";
                 journalList.appendChild(newListItem);
             })
