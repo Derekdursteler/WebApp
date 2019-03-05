@@ -47,30 +47,40 @@ var editJournal = function(id, title, date, weather, location, contents) {
     var dateInput = document.querySelector("#date");
     var weatherInput = document.querySelector("#weather");
     var locationInput = document.querySelector("#location");
+    var updateButton = document.querySelector("#submit")
 
-    titleInput.innerHTML = title;
+    titleInput.value = title;
     contentsInput.innerHTML = contents;
-    dateInput.innerHTML = date;
-    weatherInput.innerHTML = weather;
-    locationInput.innerHTML = location;
+    dateInput.value = date;
+    weatherInput.value = weather;
+    locationInput.value = location;
+    updateButton.innerHTML = "Update Entry"
 
-    console.log(title, contents, date, weather, location);
-    var data = "title=" + encodeURIComponent(title);
-    data += "&contents=" + encodeURIComponent(contents);
-    data += "&date=" + encodeURIComponent(date);
-    data += "&weather=" + encodeURIComponent(weather);
-    data += "&location=" + encodeURIComponent(location);
+    updateButton.onclick = function() {
+        title = titleInput.value;
+        contents = contentsInput.value;
+        date = dateInput.value;
+        weather = weatherInput.value;
+        location = locationInput.value;
 
-    fetch(`http://localhost:8080/journal/${id}`, {
-        method: 'PUT',
-        body: data,
-        headers: {
-            "Content-type": "application-x-www-form-urlencoded"
-        }
-    }).then(function(response) {
-        console.log("journal edited.")
-        getJournalEntries();
-    })
+        console.log(title, contents, date, weather, location);
+        var data = "title=" + encodeURIComponent(title);
+        data += "&contents=" + encodeURIComponent(contents);
+        data += "&date=" + encodeURIComponent(date);
+        data += "&weather=" + encodeURIComponent(weather);
+        data += "&location=" + encodeURIComponent(location);
+
+        fetch(`http://localhost:8080/journal/${id}`, {
+            method: 'PUT',
+            body: data,
+            headers: {
+                "Content-type": "application-x-www-form-urlencoded"
+            }
+        }).then(function(response) {
+            console.log("journal edited.")
+            getJournalEntries();
+        })
+    }
 }
 var getJournalEntries = function() {
     fetch("http://localhost:8080/journal").then(function(response) {
