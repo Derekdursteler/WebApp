@@ -42,6 +42,7 @@ var deleteJournal = function (id) {
 }
 
 var editJournal = function(id, title, date, weather, location, contents) {
+    // grab all the form info
     var titleInput = document.querySelector("#title");
     var contentsInput = document.querySelector("#content");
     var dateInput = document.querySelector("#date");
@@ -49,6 +50,7 @@ var editJournal = function(id, title, date, weather, location, contents) {
     var locationInput = document.querySelector("#location");
     var updateButton = document.querySelector("#submit")
 
+    // update form info with journal with are editting
     titleInput.value = title;
     contentsInput.innerHTML = contents;
     dateInput.value = date;
@@ -56,6 +58,7 @@ var editJournal = function(id, title, date, weather, location, contents) {
     locationInput.value = location;
     updateButton.innerHTML = "Update Entry"
 
+    // when we click update entry send that to the server/database
     updateButton.onclick = function() {
         title = titleInput.value;
         contents = contentsInput.value;
@@ -82,6 +85,7 @@ var editJournal = function(id, title, date, weather, location, contents) {
         })
     }
 }
+
 var getJournalEntries = function() {
     fetch("http://localhost:8080/journal").then(function(response) {
         response.json().then(function(data) {
