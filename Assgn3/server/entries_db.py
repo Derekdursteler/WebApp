@@ -29,5 +29,11 @@ class JournalDB:
         
     def getEntry(self, id):
         sql = self.cursor.execute("SELECT * FROM journals WHERE id =?")
-        self.cursor.exectue(sql, [id])
+        self.cursor.execute(sql, [id])
         return self.cursor.fetchone()
+
+    def deleteJournal(self, id):
+        sql = "DELETE FROM journals WHERE id = ?"
+        self.cursor.execute(sql, [id])
+        self.connection.commit()
+        return

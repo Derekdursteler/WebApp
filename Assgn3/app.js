@@ -55,11 +55,6 @@ var getJournalEntries = function() {
                 titleDiv.className = "journal-title";
                 newListItem.appendChild(titleDiv);
 
-                var contentsDiv = document.createElement("div");
-                contentsDiv.innerHTML = journal.contents;
-                contentsDiv.className = "journal-contents";
-                newListItem.appendChild(contentsDiv);
-
                 var dateDiv = document.createElement("div");
                 dateDiv.innerHTML = journal.date;
                 dateDiv.className = "journal-date";
@@ -75,8 +70,14 @@ var getJournalEntries = function() {
                 locationDiv.className = "journal-location";
                 newListItem.appendChild(locationDiv);
 
+                var contentsDiv = document.createElement("div");
+                contentsDiv.innerHTML = journal.contents;
+                contentsDiv.className = "journal-contents";
+                newListItem.appendChild(contentsDiv);
+
                 var deleteButton = document.createElement("button");
                 deleteButton.innerHTML = "Delete";
+                deleteButton.className = "deleteButton";
                 deleteButton.onclick = function() {
                     var proceed = confirm(`Do you want to delete ${journal.title}?`);
                     if (proceed) {
@@ -84,6 +85,17 @@ var getJournalEntries = function() {
                     }
                 };
                 newListItem.appendChild(deleteButton);
+
+                var editButton = document.createElement("button");
+                editButton.innerHTML = "Edit";
+                editButton.className = "editButton";
+                editButton.onclick = function() {
+                    var proceed2 = confirm(`Do you want to edit ${edit.title}`);
+                    if (proceed2) {
+                        editJournal(journal.id);
+                    }
+                };
+                newListItem.appendChild(editButton);
 
                 journalList.appendChild(newListItem);
             });

@@ -8,51 +8,54 @@ body {
     max-width: 960px;
     padding-right: 10px;
     padding-left:  10px;
-    background-color: white;
+    background: #eaeaea;
+    
 }
 
+#form {
+    font: 95% Arial, Helvetica, sans-serif;
+	max-width: 400px;
+	margin: 10px auto;
+	padding: 16px;
+} 
 h1 {
     text-align: center;
+    padding-top: 25px;
 }
 
-#titledatecontainer {
-    width: 95%;
-}
-
-#title {
-    text-align: center;
-    width: 35%;
-    float: right;
-}
-
-#date {
-    text-align: center;
-    width: 35%;
-    float: right;
-}
-
-#weatherlocationcontainer {
-    width: 95%;
-    clear:both;
-}
-
-#weather {
-    text-align: center;
-    width: 35%;
-    float: right;
-}
-
-#location {
-    text-align: center;
-    width: 35%;
-    float: right;
+#title, #weather, #date, #location, #content {
+	box-sizing: border-box;
+	width: 100%;
+	background: #fff;
+	margin-bottom: 4%;
+	border: 1px solid #ccc;
+	padding: 3%;
+	font: 95% Arial, Helvetica, sans-serif;
 }
 
 #content {
-    width: 90%;
-    text-align:left;
-    display: block;
-    margin: 0 auto;
-    height: 250px;
+    min-height: 100px;
+}
+
+#submit {
+    width: 100%;
+	padding: 3%;
+}
+
+ul#journallist {
+    list-style-type: none;
+    font: 95% Arial, Helvetica, sans-serif;
+    padding-bottom: 25px;
     
+}
+
+li {
+    border: 1px solid #ccc;
+    width: 33%;
+    display: inline-block;
+    background: #fff;
+}
+
+button.deleteButton, button.editButton {
+    float: right;
 }

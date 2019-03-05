@@ -7,22 +7,32 @@
         <body>
           <div class="wrapper">
               <h1>Daily Journal</h1>
-              <div id="padding">
-
-                  <div id="titledatecontainer">
-                    <input type="date" id="date">
+              
+              <div id="form">
+                  <div>
                     <input type="text" id="title" placeholder="Title">
                   </div>
 
-                  <div id="weatherlocationcontainer">
-                    <input type="text" id="weather" placeholder="weather">
-                    <input type="text" id="location" placeholder="location">
+                  <div>
+                    <input type="date" id="date">
                   </div>
 
+                  <div>
+                    <input type="text" id="weather" placeholder="Weather">
+                  </div>
+                  
+                  <div>
+                    <input type="text" id="location" placeholder="Location">
+                  </div>
+                  
+                  <div>
                     <textarea type="text" id="content" placeholder="Enter your days thoughts/activities/etc" required></textarea>
-                </div>
+                  </div>
+                    
                 <button id="submit">Submit</button>
                 <!-- button id="clear">Clear List</button> !-->
+                </div>
+          
                 <ul id="journallist">
 
                 </ul>

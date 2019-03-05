@@ -110,7 +110,7 @@ class MyRequestHandler(BaseHTTPRequestHandler):
 
         if collection == "restaurants":
             if id == None:
-                self.handleNotFound
+                self.handleNotFound()
             else:
                 self.handleRestaurantsDelete(id)
         else:
