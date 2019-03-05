@@ -28,12 +28,18 @@ class JournalDB:
         return self.cursor.fetchall()
         
     def getEntry(self, id):
-        sql = self.cursor.execute("SELECT * FROM journals WHERE id =?")
-        self.cursor.execute(sql, [id])
+        sql = "SELECT * FROM journals WHERE id = ?"
+        self.cursor.execute(sql, [id])  
         return self.cursor.fetchone()
 
     def deleteJournal(self, id):
         sql = "DELETE FROM journals WHERE id = ?"
         self.cursor.execute(sql, [id])
+        self.connection.commit()
+        return
+
+    def editJournal(self, id, title, contents, date, weather, location):
+        sql = "UPDATE FROM journals (title, contents, date, weather, location) VALUES (?, ?, ?, ?, ?) WHERE id = ?"
+        self.cursor.execute(sql, [title, contents, date, weather, location], [id])
         self.connection.commit()
         return

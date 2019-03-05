@@ -40,6 +40,38 @@ var deleteJournal = function (id) {
         getJournalEntries();
     })
 }
+
+var editJournal = function(id, title, date, weather, location, contents) {
+    var titleInput = document.querySelector("#title");
+    var contentsInput = document.querySelector("#content");
+    var dateInput = document.querySelector("#date");
+    var weatherInput = document.querySelector("#weather");
+    var locationInput = document.querySelector("#location");
+
+    titleInput.innerHTML = title;
+    contentsInput.innerHTML = contents;
+    dateInput.innerHTML = date;
+    weatherInput.innerHTML = weather;
+    locationInput.innerHTML = location;
+
+    console.log(title, contents, date, weather, location);
+    var data = "title=" + encodeURIComponent(title);
+    data += "&contents=" + encodeURIComponent(contents);
+    data += "&date=" + encodeURIComponent(date);
+    data += "&weather=" + encodeURIComponent(weather);
+    data += "&location=" + encodeURIComponent(location);
+
+    fetch(`http://localhost:8080/journal/${id}`, {
+        method: 'PUT',
+        body: data,
+        headers: {
+            "Content-type": "application-x-www-form-urlencoded"
+        }
+    }).then(function(response) {
+        console.log("journal edited.")
+        getJournalEntries();
+    })
+}
 var getJournalEntries = function() {
     fetch("http://localhost:8080/journal").then(function(response) {
         response.json().then(function(data) {
@@ -90,9 +122,9 @@ var getJournalEntries = function() {
                 editButton.innerHTML = "Edit";
                 editButton.className = "editButton";
                 editButton.onclick = function() {
-                    var proceed2 = confirm(`Do you want to edit ${edit.title}`);
+                    var proceed2 = confirm(`Do you want to edit ${journal.title}`);
                     if (proceed2) {
-                        editJournal(journal.id);
+                        editJournal(journal.id, journal.title, journal.date, journal.weather, journal.location, journal.contents);
                     }
                 };
                 newListItem.appendChild(editButton);

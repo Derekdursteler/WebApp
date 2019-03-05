@@ -65,6 +65,9 @@ class MyRequestHandler(BaseHTTPRequestHandler):
         self.send_response(200)
         self.send_header("Access-Control-Allow-Origin", "*")
         self.end_headers()
+
+    def handleJournalsEdit(self, id):
+        pass
     
     def do_OPTIONS(self):
         self.send_response(200)
@@ -111,6 +114,23 @@ class MyRequestHandler(BaseHTTPRequestHandler):
                 self.handleNotFound()
             else:
                 self.handleJournalsDelete(id)
+        else:
+            self.handleNotFound()
+        return
+
+    def do_PUT(self):
+        parts = self.path.split('/')[1:]
+        collection = parts[0]
+        if len(parts) > 1:
+            id = parts[1]
+        else:
+            id = None
+
+        if collection == "journal":
+            if id == None:
+                self.handleNotFound()
+            else:
+                self.handleJournalsEdit(id)
         else:
             self.handleNotFound()
         return
