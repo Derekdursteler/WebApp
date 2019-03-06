@@ -20,5 +20,5 @@ location TEXT);
 | List | GET | http://localhost:8080/journal |
 | Retrieve | GET  | http://localhost:8080/journal/id |
 | Create | POST | http://localhost:8080/journal |
-| Delete | DELETE | http://localhost:8080/journal |
+| Delete | DELETE | http://localhost:8080/journal/id |
 | Update | PUT | http://localhost:8080/journal/id|
