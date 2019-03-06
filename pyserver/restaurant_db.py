@@ -37,3 +37,9 @@ class RestaurantDB:
         self.cursor.execute(sql, [id])
         self.connection.commit()
         return
+
+    def updateRestaurant(self, name, cuisine, hours, rating, id):
+        sql = "UPDATE restaurants SET name = ?, cuisine = ?, hours = ?, rating = ? WHERE id = ?"
+        self.cursor.execute(sql, [name, cuisine, hours, rating, id])
+        self.connection.commit()
+        return

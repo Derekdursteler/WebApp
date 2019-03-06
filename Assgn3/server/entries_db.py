@@ -39,7 +39,7 @@ class JournalDB:
         return
 
     def editJournal(self, id, title, contents, date, weather, location):
-        sql = "UPDATE journals SET (title, contents, date, weather, location) = (?, ?, ?, ?, ?) WHERE id =" + id
-        self.cursor.execute(sql, [title, contents, date, weather, location])
+        sql = "UPDATE journals SET (title, contents, date, weather, location) = (?, ?, ?, ?, ?) WHERE id = ?"
+        self.cursor.execute(sql, [title, contents, date, weather, location, id])
         self.connection.commit()
         return

@@ -61,33 +61,42 @@ class MyRequestHandler(BaseHTTPRequestHandler):
 
     def handleJournalsDelete(self, id):
         db = JournalDB()
-        db.deleteJournal(id)
-        self.send_response(200)
-        self.send_header("Access-Control-Allow-Origin", "*")
-        self.end_headers()
+        entry = db.getEntry(id)
+        if entry == None:
+            self.handleNotFound()
+        else:
+            db.deleteJournal(id)
+            self.send_response(200)
+            self.send_header("Access-Control-Allow-Origin", "*")
+            self.end_headers()
 
     def handleJournalsEdit(self, id):
-        length = self.headers["Content-length"]
-        body = self.rfile.read(int(length)).decode("utf-8")
-        print("the text body:", body)
-        # parse_qs was imported and returns a dictionary
-        parsed_body = parse_qs(body)
-        print("the parsed body:", parsed_body)
-
-        title = parsed_body["title"][0]
-        contents = parsed_body["contents"][0]
-        date = parsed_body["date"][0]
-        weather = parsed_body["weather"][0]
-        location = parsed_body["location"][0]
-        # send these values to the database
         db = JournalDB()
-        # call db.createEntry() right here and fill in the fields
-        db.editJournal(id, title, contents, date, weather, location)
-        print(title, contents, date, weather, location)
+        entry = db.getEntry(id)
+        if entry == None:
+            self.handleNotFound()
+        else:
+            length = self.headers["Content-length"]
+            body = self.rfile.read(int(length)).decode("utf-8")
+            print("the text body:", body)
+            # parse_qs was imported and returns a dictionary
+            parsed_body = parse_qs(body)
+            print("the parsed body:", parsed_body)
 
-        self.send_response(201)
-        self.send_header("Access-Control-Allow-Origin", "*")
-        self.end_headers()
+            title = parsed_body["title"][0]
+            contents = parsed_body["contents"][0]
+            date = parsed_body["date"][0]
+            weather = parsed_body["weather"][0]
+            location = parsed_body["location"][0]
+            # send these values to the database
+            # call db.editJournal() right here and fill in the fields
+            db.editJournal(id, title, contents, date, weather, location)
+            print(title, contents, date, weather, location)
+
+            self.send_response(200)
+            self.send_header("Access-Control-Allow-Origin", "*")
+            self.end_headers()
+            return
         return
         
     
@@ -147,7 +156,6 @@ class MyRequestHandler(BaseHTTPRequestHandler):
             id = parts[1]
         else:
             id = None
-
         if collection == "journal":
             if id == None:
                 self.handleNotFound()

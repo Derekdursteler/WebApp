@@ -29,6 +29,7 @@ var createJournalEntry = function() {
     }).then(function(response) {
         console.log("journal entry saved");
         getJournalEntries();
+        clearForm();
     });
 }
 
@@ -39,6 +40,22 @@ var deleteJournal = function (id) {
         console.log("journal deleted.")
         getJournalEntries();
     })
+}
+
+var clearForm = function() {
+    var titleInput = document.querySelector("#title");
+    var contentsInput = document.querySelector("#content");
+    var dateInput = document.querySelector("#date");
+    var weatherInput = document.querySelector("#weather");
+    var locationInput = document.querySelector("#location");
+    var submitButton = document.querySelector("#submit");
+
+    titleInput.value = "";
+    contentsInput.value = "";
+    dateInput.value = "";
+    weatherInput.value = "";
+    locationInput.value = "";
+    submitButton.innerHTML = "Submit"
 }
 
 var editJournal = function(id, title, date, weather, location, contents) {
@@ -82,8 +99,9 @@ var editJournal = function(id, title, date, weather, location, contents) {
         }).then(function(response) {
             console.log("journal edited.")
             getJournalEntries();
-        })
-    }
+            clearForm();
+        });
+    };
 }
 
 var getJournalEntries = function() {
@@ -144,6 +162,11 @@ var getJournalEntries = function() {
                 newListItem.appendChild(editButton);
 
                 journalList.appendChild(newListItem);
+
+                submitButton.onclick = function() {
+                    // console.log("submit button clicked!");
+                    createJournalEntry();
+                }                
             });
         });
     });
