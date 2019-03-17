@@ -2,6 +2,8 @@
 ##### The name of your resource, and the name of each of its attributes:
  
  - http://localhost:8080/journal
+ - Attributes:
+    - Title, Date, Weather, Location, Contents
 
 ##### The database schema which represents your resource, documented as a valid SQLite CREATE TABLE query.
 - .schema
