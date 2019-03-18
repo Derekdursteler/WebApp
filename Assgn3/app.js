@@ -154,7 +154,7 @@ var getJournalEntries = function() {
                 editButton.innerHTML = "Edit";
                 editButton.className = "editButton";
                 editButton.onclick = function() {
-                    var proceed2 = confirm(`Do you want to edit ${journal.title}`);
+                    var proceed2 = confirm(`Do you want to edit ${journal.title}?`);
                     if (proceed2) {
                         editJournal(journal.id, journal.title, journal.date, journal.weather, journal.location, journal.contents);
                     }

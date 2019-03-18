@@ -8,12 +8,12 @@
 ##### The database schema which represents your resource, documented as a valid SQLite CREATE TABLE query.
 - .schema
 - CREATE TABLE journals (
-- id INTEGER PRIMARY KEY,
-- title TEXT,
-- contents TEXT,
-- date TEXT,
-- weather TEXT,
-- location TEXT);
+-   id INTEGER PRIMARY KEY,
+-   title TEXT,
+-   contents TEXT,
+-   date TEXT,
+-   weather TEXT,
+-   location TEXT);
 
 ##### All REST endpoints implemented by your API server. Include the name, HTTP method, and path for each.
 -------
