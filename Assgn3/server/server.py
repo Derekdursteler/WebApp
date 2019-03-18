@@ -116,7 +116,7 @@ class MyRequestHandler(BaseHTTPRequestHandler):
         else:
             id = None
 
-        if collection == "journal":
+        if collection == "journals":
             if id == None:
                 self.handleJournalsList()
             else:
@@ -126,7 +126,7 @@ class MyRequestHandler(BaseHTTPRequestHandler):
         return
     
     def do_POST(self):
-        if self.path == "/journal":
+        if self.path == "/journals":
             self.handleJournalsCreate() 
         else:
             self.handleNotFound()
@@ -140,7 +140,7 @@ class MyRequestHandler(BaseHTTPRequestHandler):
         else:
             id = None
 
-        if collection == "journal":
+        if collection == "journals":
             if id == None:
                 self.handleNotFound()
             else:
@@ -156,7 +156,7 @@ class MyRequestHandler(BaseHTTPRequestHandler):
             id = parts[1]
         else:
             id = None
-        if collection == "journal":
+        if collection == "journals":
             if id == None:
                 self.handleNotFound()
             else:

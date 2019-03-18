@@ -1,7 +1,7 @@
 # Daily Journal
 ##### The name of your resource, and the name of each of its attributes:
  
- - http://localhost:8080/journal
+ - http://localhost:8080/journals
  - Attributes:
     - Title, Date, Weather, Location, Contents
 
@@ -19,8 +19,8 @@
 -------
 | Name | HTTP Method | Path |
 | ------ | ------ | -------| 
-| List | GET | http://localhost:8080/journal |
-| Retrieve | GET  | http://localhost:8080/journal/id |
-| Create | POST | http://localhost:8080/journal |
-| Delete | DELETE | http://localhost:8080/journal/id |
-| Update | PUT | http://localhost:8080/journal/id|
+| List | GET | http://localhost:8080/journals |
+| Retrieve | GET  | http://localhost:8080/journals/id |
+| Create | POST | http://localhost:8080/journals |
+| Delete | DELETE | http://localhost:8080/journals/id |
+| Update | PUT | http://localhost:8080/journals/id|

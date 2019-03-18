@@ -1,7 +1,7 @@
-var journal = null;
+var journals = null;
 var submitButton = document.querySelector("#submit");
 
-var createJournalEntry = function() {
+var createjournalsEntry = function() {
     var titleInput = document.querySelector("#title");
     var contentsInput = document.querySelector("#content");
     var dateInput = document.querySelector("#date");
@@ -20,25 +20,25 @@ var createJournalEntry = function() {
     data += "&date=" + encodeURIComponent(date);
     data += "&weather=" + encodeURIComponent(weather);
     data += "&location=" + encodeURIComponent(location);
-    fetch("http://localhost:8080/journal", {
+    fetch("http://localhost:8080/journals", {
         method: 'POST',
         body: data,
         headers: {
             "Content-type": "application/x-www-form-urlencoded"
         }
     }).then(function(response) {
-        console.log("journal entry saved");
-        getJournalEntries();
+        console.log("journals entry saved");
+        getjournalsEntries();
         clearForm();
     });
 }
 
-var deleteJournal = function (id) {
-    fetch(`http://localhost:8080/journal/${id}`, {
+var deletejournals = function (id) {
+    fetch(`http://localhost:8080/journals/${id}`, {
         method: 'DELETE'
     }).then(function(response) {
-        console.log("journal deleted.")
-        getJournalEntries();
+        console.log("journals deleted.")
+        getjournalsEntries();
     })
 }
 
@@ -58,7 +58,7 @@ var clearForm = function() {
     submitButton.innerHTML = "Submit"
 }
 
-var editJournal = function(id, title, date, weather, location, contents) {
+var editjournals = function(id, title, date, weather, location, contents) {
     // grab all the form info
     var titleInput = document.querySelector("#title");
     var contentsInput = document.querySelector("#content");
@@ -67,7 +67,7 @@ var editJournal = function(id, title, date, weather, location, contents) {
     var locationInput = document.querySelector("#location");
     var updateButton = document.querySelector("#submit")
 
-    // update form info with journal with are editting
+    // update form info with journals with are editting
     titleInput.value = title;
     contentsInput.innerHTML = contents;
     dateInput.value = date;
@@ -90,62 +90,62 @@ var editJournal = function(id, title, date, weather, location, contents) {
         data += "&weather=" + encodeURIComponent(weather);
         data += "&location=" + encodeURIComponent(location);
 
-        fetch(`http://localhost:8080/journal/${id}`, {
+        fetch(`http://localhost:8080/journals/${id}`, {
             method: 'PUT',
             body: data,
             headers: {
                 "Content-type": "application-x-www-form-urlencoded"
             }
         }).then(function(response) {
-            console.log("journal edited.")
-            getJournalEntries();
+            console.log("journals edited.")
+            getjournalsEntries();
             clearForm();
         });
     };
 }
 
-var getJournalEntries = function() {
-    fetch("http://localhost:8080/journal").then(function(response) {
+var getjournalsEntries = function() {
+    fetch("http://localhost:8080/journals").then(function(response) {
         response.json().then(function(data) {
-            journal = data;
-            //console.log(journal);
-            var journalList = document.querySelector("#journallist");
-            journalList.innerHTML = "";
-            data.forEach(function(journal) {
+            journals = data;
+            //console.log(journals);
+            var journalsList = document.querySelector("#journalslist");
+            journalsList.innerHTML = "";
+            data.forEach(function(journals) {
                 var newListItem = document.createElement("li");
-                //console.log(journal, "journal");
+                //console.log(journals, "journals");
                 var titleDiv = document.createElement("div");
-                titleDiv.innerHTML = journal.title;
-                titleDiv.className = "journal-title";
+                titleDiv.innerHTML = journals.title;
+                titleDiv.className = "journals-title";
                 newListItem.appendChild(titleDiv);
 
                 var dateDiv = document.createElement("div");
-                dateDiv.innerHTML = journal.date;
-                dateDiv.className = "journal-date";
+                dateDiv.innerHTML = journals.date;
+                dateDiv.className = "journals-date";
                 newListItem.appendChild(dateDiv);
 
                 var weatherDiv = document.createElement("div");
-                weatherDiv.innerHTML = journal.weather;
-                weatherDiv.className = "journal-weather";
+                weatherDiv.innerHTML = journals.weather;
+                weatherDiv.className = "journals-weather";
                 newListItem.appendChild(weatherDiv);
 
                 var locationDiv = document.createElement("div");
-                locationDiv.innerHTML = journal.location;
-                locationDiv.className = "journal-location";
+                locationDiv.innerHTML = journals.location;
+                locationDiv.className = "journals-location";
                 newListItem.appendChild(locationDiv);
 
                 var contentsDiv = document.createElement("div");
-                contentsDiv.innerHTML = journal.contents;
-                contentsDiv.className = "journal-contents";
+                contentsDiv.innerHTML = journals.contents;
+                contentsDiv.className = "journals-contents";
                 newListItem.appendChild(contentsDiv);
 
                 var deleteButton = document.createElement("button");
                 deleteButton.innerHTML = "Delete";
                 deleteButton.className = "deleteButton";
                 deleteButton.onclick = function() {
-                    var proceed = confirm(`Do you want to delete ${journal.title}?`);
+                    var proceed = confirm(`Do you want to delete ${journals.title}?`);
                     if (proceed) {
-                        deleteJournal(journal.id);
+                        deletejournals(journals.id);
                     }
                 };
                 newListItem.appendChild(deleteButton);
@@ -154,18 +154,18 @@ var getJournalEntries = function() {
                 editButton.innerHTML = "Edit";
                 editButton.className = "editButton";
                 editButton.onclick = function() {
-                    var proceed2 = confirm(`Do you want to edit ${journal.title}?`);
+                    var proceed2 = confirm(`Do you want to edit ${journals.title}?`);
                     if (proceed2) {
-                        editJournal(journal.id, journal.title, journal.date, journal.weather, journal.location, journal.contents);
+                        editjournals(journals.id, journals.title, journals.date, journals.weather, journals.location, journals.contents);
                     }
                 };
                 newListItem.appendChild(editButton);
 
-                journalList.appendChild(newListItem);
+                journalsList.appendChild(newListItem);
 
                 submitButton.onclick = function() {
                     // console.log("submit button clicked!");
-                    createJournalEntry();
+                    createjournalsEntry();
                 }                
             });
         });
@@ -175,7 +175,7 @@ var getJournalEntries = function() {
 // OnClick to add item
 submitButton.onclick = function() {
     // console.log("submit button clicked!");
-    createJournalEntry();
+    createjournalsEntry();
 }
 
 // make it so enter submit item
@@ -190,4 +190,4 @@ submitButton.onclick = function() {
     }
 }) */
 
-getJournalEntries();
+getjournalsEntries();
